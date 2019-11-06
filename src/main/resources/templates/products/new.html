@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+						<div class="title">
+							<h2>Nuevo Producto</h2>
+						</div>
+
+						<form th:object="${product}" th:action="@{/products/create}"
+							th:method="post">																		
+
+							<div class="form-group">
+								<input th:field="*{name}" id="name" type="text"
+									class="form-control validate"> <label for="name">Nombre</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>																	
+							</div>							
+							
+							<div class="form-group">
+								<input th:field="*{unit}" id="unit" type="text"
+									class="form-control validate"> <label for="unit">Und</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}"></span>																	
+							</div>
+								
+								
+							<div class="form-group">
+								<input th:field="*{location}" id="location" type="text"
+									class="form-control validate"> <label for="location">Ubicacion</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></span>																	
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{price}" id="price" type="text"
+									class="form-control validate"> <label for="price">Precio</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>																	
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{stock}" id="stock" type="text"
+									class="form-control validate"> <label for="stock">Stock</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></span>																	
+							</div>
+							
+							<div class="form-group">
+								<input th:field="*{min_stock}" id="min_stock" type="text"
+									class="form-control validate"> <label for="min_stock">Stock Minimo</label>	
+								<span class="text-danger errorMsg" 
+								th:if="${#fields.hasErrors('min_stock')}" th:errors="*{min_stock}"></span>																	
+							</div>
+							
+							
+							<div class="form-group">
+								<label for="category">Categoria</label> 								
+								<select id="category" class="form-control"
+									th:field="*{categories}" multiple="multiple" style="height: 120px">
+										<option th:each="category:${categories}" th:text="${category.name}"
+											th:value="${category.id}">
+										</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label for="supplier">Proveedor</label> <select id="supplier" class="form-control"							
+									th:field="*{supplier}" >
+								<option th:each="supplier : ${suppliers}" th:text="${supplier.name}"
+									th:value="${supplier.id}"></option>
+								</select>
+							</div>
+					
+							<button type="submit" class="btn btn-dark">Guardar</button>
+							<a class="btn btn-primary" th:href="@{'/products'}">Cancelar</a>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="fragments/footer"></th:block>
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>
+
